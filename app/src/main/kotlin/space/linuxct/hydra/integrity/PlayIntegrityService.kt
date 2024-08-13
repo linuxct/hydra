@@ -1,8 +1,10 @@
 package space.linuxct.hydra.integrity
 
+import android.app.Activity
 import android.content.Context
 import android.util.Base64
 import android.util.Log
+import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.android.play.core.integrity.IntegrityManagerFactory
 import com.google.android.play.core.integrity.StandardIntegrityManager.PrepareIntegrityTokenRequest
@@ -23,8 +25,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import space.linuxct.hydra.BuildConfig
-import space.linuxct.hydra.HydraApplication
 import space.linuxct.hydra.R
+import space.linuxct.hydra.eventbus.EventBus
+import space.linuxct.hydra.eventbus.PlayIntegrityTokenDecryptedEvent
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 
@@ -56,7 +59,7 @@ class PlayIntegrityService(context: Context) {
         requestIntegrityVerdict(shouldShowRawLogs, attestationChallenge)
     }
 
-    fun performRemediation(remediationType: RemediationTypeEnum) {
+    fun performRemediation(remediationType: RemediationTypeEnum, previousActivityContext: Activity) {
         Log.i(_tag, "Starting a Play Integrity Standard remediation\nRemediation type: $remediationType\n")
 
         if (lastKnownGoodResponse == null) {
@@ -65,16 +68,24 @@ class PlayIntegrityService(context: Context) {
         }
 
         val dialogTaskResult = lastKnownGoodResponse!!.showDialog(
-            HydraApplication.ACTIVITY,
+            previousActivityContext,
             RemediationTypeEnum.toInt(remediationType)
         )
 
         dialogTaskResult.addOnSuccessListener { value ->
+            previousActivityContext.runOnUiThread {
+                Toast.makeText(previousActivityContext, "Remediation OK: ${RemediationResultEnum.fromInt(value)}", Toast.LENGTH_LONG).show()
+            }
+
             Log.i(_tag, "Remediation finished with code ${RemediationResultEnum.fromInt(value)}")
             lastKnownGoodResponse = null
         }
 
         dialogTaskResult.addOnFailureListener { exception ->
+            previousActivityContext.runOnUiThread {
+                Toast.makeText(previousActivityContext, "Remediation FAIL: ${exception.message!!}", Toast.LENGTH_LONG).show()
+            }
+
             Log.i(_tag, "Remediation failed to execute with exception ${exception.message} -> $exception")
             lastKnownGoodResponse = null
         }
@@ -142,6 +153,7 @@ class PlayIntegrityService(context: Context) {
                     .create()
 
                 val jsonElement = gson.toJson(result)
+                EventBus.publish(PlayIntegrityTokenDecryptedEvent(jsonElement))
                 Log.i(_tag, "Decrypted Play Integrity response:\n${jsonElement}")
                 Log.i(_tag, "--------------------")
             }
