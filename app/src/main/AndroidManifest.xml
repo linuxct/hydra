@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Hydra"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".views.MainActivity"
             android:exported="true"
             android:label="@string/activity_name">
             <intent-filter>

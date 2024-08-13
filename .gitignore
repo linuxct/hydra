@@ -13,3 +13,9 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/release/*.aab
+/app/release/*.apk
+/app/debug/*.aab
+/app/debug/*.apk
+/signingkey.keystore
+/app/src/main/res/raw/hydra_service_account.json

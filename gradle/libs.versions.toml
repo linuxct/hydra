@@ -6,6 +6,10 @@ appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.9.1"
 constraintlayout = "2.1.4"
+playintegrity-api = "1.4.0"
+playintegrity-backend = "v1-rev20240725-2.0.0"
+playintegrity-backend-apiclient = "2.6.0"
+jose4j = "0.9.5"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -13,6 +17,10 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+playintegrity-api = { group = "com.google.android.play", name = "integrity", version.ref = "playintegrity-api" }
+playintegrity-backend = { group = "com.google.apis", name = "google-api-services-playintegrity", version.ref = "playintegrity-backend" }
+playintegrity-backend-apiclient = { group = "com.google.api-client", name = "google-api-client", version.ref = "playintegrity-backend-apiclient" }
+jose4j = { group = "org.bitbucket.b_c", name = "jose4j", version.ref = "jose4j" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
