@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -50,18 +51,43 @@ class MainActivity : AppCompatActivity() {
     private suspend fun subscribeToTokenDecrypted(){
         EventBus.subscribe<PlayIntegrityTokenDecryptedEvent> {
             runOnUiThread {
-                showRemediationDialog(this@MainActivity, layoutInflater) { remediation ->
-                    runOnUiThread {
-                        Toast.makeText(
-                            this@MainActivity,
-                            "Starting remediation...",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                    playIntegrityService.performRemediation(remediation, this@MainActivity)
+                showPlayIntegrityResponseDialog(this@MainActivity, layoutInflater, it.data) {
+                    onPlayIntegrityDialogOk()
                 }
             }
         }
+    }
+
+    private fun onPlayIntegrityDialogOk(){
+        showRemediationDialog(this@MainActivity, layoutInflater) { remediation ->
+            runOnUiThread {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Starting remediation...",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            playIntegrityService.performRemediation(remediation, this@MainActivity)
+        }
+    }
+
+    private fun showPlayIntegrityResponseDialog(
+        context: Context,
+        layoutInflater: LayoutInflater,
+        dataToShow: String,
+        onOkClicked: () -> Unit
+    ) {
+        val builder = AlertDialog.Builder(context)
+        val view = layoutInflater.inflate(R.layout.play_integrity_result_dialog, null)
+        val resultTextView = view.findViewById<TextView>(R.id.play_integrity_result)
+        resultTextView.text = dataToShow
+
+        builder.setView(view)
+            .setPositiveButton("Continue") { dialog, _ ->
+                onOkClicked()
+                dialog.dismiss()
+            }
+            .show()
     }
 
     private fun showRemediationDialog(
