@@ -10,11 +10,11 @@ You can use Android Studio to build the application, or you can build it by usin
 Navigate to the folder where the source code is located:  
 ```cd /path/where/you/downloaded/Hydra/```  
 
-Now, login to Google Cloud using a Google account of your choice. While doing so, create a Google Cloud project for Hydra.
-After you have selected the project, go to the API library and enable the Play Integrity API there.
-Lastly, create a Google Cloud Service account under this project. You can name it anything you want. 
-After you do that go to the Keys tab, create a new key and download the JSON file.
-Place this JSON at the path (renaming it where needed): `app/src/main/res/raw/hydra_service_account.json`
+Now, login to Google Cloud using a Google account of your choice. While doing so, create a Google Cloud project for Hydra.  
+After you have selected the project, go to the API library and enable the Play Integrity API there.  
+Lastly, create a Google Cloud Service account under this project. You can name it anything you want.   
+After you do that go to the Keys tab, create a new key and download the JSON file.  
+Place this JSON at the path (renaming it where needed): `app/src/main/res/raw/hydra_service_account.json`  
 
 Now, check that Gradle runs properly by executing:  
 For Linux/MacOS: `./gradlew tasks`  
