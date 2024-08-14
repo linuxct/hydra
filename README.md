@@ -6,7 +6,7 @@
 
 Tool that allows a user to experience and test the Play Integrity Remediation feature, [first presented by Google at 2024's I/O](https://io.google/2024/explore/f757438a-844f-4c59-8dd4-9a5580a5e23d/).  
 
-**Please note**: Due to the need for Google Cloud credentials, redistributable/prebuilt versions of Hydra will not be facilitated.  
+**Please note**: Due to the need for Google Cloud credentials, redistributable/prebuilt versions of Hydra will not be facilitated. 
 **You will have to build it yourself.**
 
 ## Build
