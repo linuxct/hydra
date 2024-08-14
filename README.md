@@ -16,6 +16,7 @@ Navigate to the folder where the source code is located:
 
 Now, login to Google Cloud using a Google account of your choice. While doing so, create a Google Cloud project for Hydra.  
 After you have selected the project, go to the API library and enable the Play Integrity API there.  
+Copy the Google Cloud project ID and replace the one shown in [line 46 of the PlayIntegrityService.kt file](https://github.com/linuxct/hydra/blob/main/app/src/main/kotlin/space/linuxct/hydra/integrity/PlayIntegrityService.kt#L46).  
 Lastly, create a Google Cloud Service account under this project. You can name it anything you want.   
 After you do that go to the Keys tab, create a new key and download the JSON file.  
 Place this JSON at the path (renaming it where needed): `app/src/main/res/raw/hydra_service_account.json`  
