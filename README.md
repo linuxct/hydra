@@ -1,3 +1,7 @@
+<p align="center" width="100%">
+  <img src="https://github.com/linuxct/hydra/blob/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp?raw=true" alt="logo"></img><br/>
+</p>
+
 # Hydra
 
 It is a tool that allows a user to experience and test the Play Integrity Remediation feature, first presented by Google at 2024's I/O.  
