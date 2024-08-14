@@ -1,6 +1,6 @@
 # Hydra
 
-It is a tool that allows a user to experience and test the Play Integrity Remediation feature, first presented by Google at 2024's I/O.
+It is a tool that allows a user to experience and test the Play Integrity Remediation feature, first presented by Google at 2024's I/O.  
 Please note: Due to the need for Google Cloud credentials, redistributable/prebuilt versions of Hydra will not be facilitated. You will have to build it yourself. 
 
 ## Build
